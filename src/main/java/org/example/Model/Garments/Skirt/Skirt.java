@@ -33,4 +33,18 @@ public class Skirt extends Garment {
     public void setPattern(SkirtPattern pattern) {
         this.pattern = pattern;
     }
+
+    @Override
+    public String toString() {
+        return "Skirt{" +
+                "id=" + getId() +
+                ", name="+ getName() +
+                ", price="+ getPrice() +
+                ", size="+ getSize() +
+                ", material="+ getMaterial() +
+                ", colour="+ getColour() +
+                ", waistline=" + waistline +
+                ", pattern=" + pattern +
+                '}';
+    }
 }

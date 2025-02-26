@@ -33,4 +33,18 @@ public class Trousers extends Garment {
     public void setLength(TrouserLength length) {
         this.length = length;
     }
+
+    @Override
+    public String toString() {
+        return "Trousers{" +
+                "id=" + getId() +
+                ", name="+ getName() +
+                ", price="+ getPrice() +
+                ", size="+ getSize() +
+                ", material="+ getMaterial() +
+                ", colour="+ getColour() +
+                ", fit=" + fit +
+                ", length=" + length +
+                '}';
+    }
 }

@@ -33,4 +33,18 @@ public class TShirt extends Garment {
     public void setNeck(TShirtNeck neck) {
         this.neck = neck;
     }
+
+    @Override
+    public String toString() {
+        return "TShirt{" +
+                "id=" + getId() +
+                ", name="+ getName() +
+                ", price="+ getPrice() +
+                ", size="+ getSize() +
+                ", material="+ getMaterial() +
+                ", colour="+ getColour() +
+                ", sleeves=" + sleeves +
+                ", neck=" + neck +
+                '}';
+    }
 }
