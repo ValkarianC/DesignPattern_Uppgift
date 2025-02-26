@@ -1,0 +1,36 @@
+package org.example.Model.Garments.Skirt;
+
+import org.example.Model.Garments.Garment;
+import org.example.Model.Garments.GarmentColour;
+import org.example.Model.Garments.GarmentMaterial;
+import org.example.Model.Garments.GarmentSize;
+
+public class Skirt extends Garment {
+    private SkirtWaistline waistline;
+    private SkirtPattern pattern;
+
+    public Skirt() {
+    }
+
+    public Skirt(int id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour, SkirtWaistline waistline, SkirtPattern pattern) {
+        super(id, name, price, size, material, colour);
+        this.waistline = waistline;
+        this.pattern = pattern;
+    }
+
+    public SkirtWaistline getWaistline() {
+        return waistline;
+    }
+
+    public void setWaistline(SkirtWaistline waistline) {
+        this.waistline = waistline;
+    }
+
+    public SkirtPattern getPattern() {
+        return pattern;
+    }
+
+    public void setPattern(SkirtPattern pattern) {
+        this.pattern = pattern;
+    }
+}
