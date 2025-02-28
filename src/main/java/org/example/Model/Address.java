@@ -67,4 +67,13 @@ public class Address {
     public void setPostcode(String postcode) {
         this.postcode = postcode;
     }
+
+    public String getFullAddress(){
+        return addressLine1 + ", " +
+                (addressLine2.isBlank() ? "" : (addressLine2 + ", ")) +
+                town + ", " +
+                (county.isBlank() ? "" : (county + ", ")) +
+                country + ", " +
+                postcode;
+    }
 }
