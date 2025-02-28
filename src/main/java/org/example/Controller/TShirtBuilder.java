@@ -52,12 +52,23 @@ public class TShirtBuilder implements GarmentBuilder{
         return this;
     }
 
+    private String createID(){
+        String id = "G-2";
+        id += tShirt.getSize().INDEX;
+        id += tShirt.getMaterial().INDEX;
+        id += tShirt.getColour().INDEX;
+        id += tShirt.getSleeves().INDEX;
+        id += tShirt.getNeck().INDEX;
+        return id;
+    }
+
     @Override
     public TShirt build() {
         if (tShirt.getSize() == null || tShirt.getMaterial() == null || tShirt.getColour() == null || tShirt.getSleeves() == null || tShirt.getNeck() == null){
             throw new BuildException("Skirt creation", tShirt);
         }
         tShirt.setName(tShirt.getSize() + " " + tShirt.getColour() + " " + tShirt.getMaterial() + " T-Shirt");
-        return null;
+        tShirt.setId(createID());
+        return tShirt;
     }
 }

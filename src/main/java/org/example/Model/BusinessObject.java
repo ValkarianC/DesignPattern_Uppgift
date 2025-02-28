@@ -1,22 +1,22 @@
 package org.example.Model;
 
 public abstract class BusinessObject {
-    private int Id;
+    private String Id;
     private String name;
 
     public BusinessObject() {
     }
 
-    public BusinessObject(int id, String name) {
+    public BusinessObject(String id, String name) {
         Id = id;
         this.name = name;
     }
 
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
     }
 

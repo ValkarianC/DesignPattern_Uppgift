@@ -10,9 +10,10 @@ public class Skirt extends Garment {
     private SkirtPattern pattern;
 
     public Skirt() {
+        this.setPrice(49.99);
     }
 
-    public Skirt(int id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour, SkirtWaistline waistline, SkirtPattern pattern) {
+    public Skirt(String id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour, SkirtWaistline waistline, SkirtPattern pattern) {
         super(id, name, price, size, material, colour);
         this.waistline = waistline;
         this.pattern = pattern;

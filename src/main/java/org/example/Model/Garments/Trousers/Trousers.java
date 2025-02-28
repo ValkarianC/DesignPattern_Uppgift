@@ -10,9 +10,10 @@ public class Trousers extends Garment {
     private TrouserLength length;
 
     public Trousers() {
+        this.setPrice(79.99);
     }
 
-    public Trousers(int id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour, TrouserFit fit, TrouserLength length) {
+    public Trousers(String id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour, TrouserFit fit, TrouserLength length) {
         super(id, name, price, size, material, colour);
         this.fit = fit;
         this.length = length;

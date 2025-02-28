@@ -53,6 +53,16 @@ public class SkirtBuilder implements GarmentBuilder{
         return this;
     }
 
+    private String createID(){
+        String id = "G-3";
+        id += skirt.getSize().INDEX;
+        id += skirt.getMaterial().INDEX;
+        id += skirt.getColour().INDEX;
+        id += skirt.getWaistline().INDEX;
+        id += skirt.getPattern().INDEX;
+        return id;
+    }
+
 
 
     @Override
@@ -61,6 +71,7 @@ public class SkirtBuilder implements GarmentBuilder{
             throw new BuildException("Skirt creation", skirt);
         }
         skirt.setName(skirt.getSize() + " " + skirt.getColour() + " " + skirt.getMaterial() + " Skirt");
-        return null;
+        skirt.setId(createID());
+        return skirt;
     }
 }

@@ -53,12 +53,23 @@ public class TrouserBuilder implements GarmentBuilder{
         return this;
     }
 
+    private String createID(){
+        String id = "G-1";
+        id += trousers.getSize().INDEX;
+        id += trousers.getMaterial().INDEX;
+        id += trousers.getColour().INDEX;
+        id += trousers.getFit().INDEX;
+        id += trousers.getLength().INDEX;
+        return id;
+    }
+
     @Override
     public Trousers build() {
         if (trousers.getSize() == null || trousers.getMaterial() == null || trousers.getColour() == null || trousers.getFit() == null || trousers.getLength() == null){
             throw new BuildException("Trouser creation", trousers);
         }
         trousers.setName(trousers.getSize() + " " + trousers.getColour() + " " + trousers.getMaterial() + " Trousers");
+        trousers.setId(createID());
         return trousers;
     }
 }

@@ -11,7 +11,7 @@ public abstract class Garment extends BusinessObject {
     public Garment() {
     }
 
-    public Garment(int id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour) {
+    public Garment(String id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour) {
         super(id, name);
         this.price = price;
         this.size = size;

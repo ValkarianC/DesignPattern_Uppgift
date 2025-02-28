@@ -10,9 +10,10 @@ public class TShirt extends Garment {
     private TShirtNeck neck;
 
     public TShirt() {
+        this.setPrice(32.99);
     }
 
-    public TShirt(int id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour, TShirtSleeves sleeves, TShirtNeck neck) {
+    public TShirt(String id, String name, double price, GarmentSize size, GarmentMaterial material, GarmentColour colour, TShirtSleeves sleeves, TShirtNeck neck) {
         super(id, name, price, size, material, colour);
         this.sleeves = sleeves;
         this.neck = neck;

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 public class Customer extends BusinessObject{
     private String email;
-    private ArrayList<String> address;
+    private Address address;
 
     public Customer() {
     }
 
-    public Customer(int id, String name, String email, ArrayList<String> address) {
+    public Customer(String id, String name, String email, Address address) {
         super(id, name);
         this.email = email;
         this.address = address;
@@ -23,11 +23,11 @@ public class Customer extends BusinessObject{
         this.email = email;
     }
 
-    public ArrayList<String> getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(ArrayList<String> address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 }
