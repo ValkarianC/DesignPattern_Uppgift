@@ -44,7 +44,8 @@ public class WelcomeMenu {
             int choice = Integer.parseInt(scanner.next());
             switch (choice){
                 case 1:
-                    CustomerMenu.getInstance().createCustomerMenu(currentCustomer);
+                    CustomerMenu.getInstance().setCurrentCustomer(currentCustomer);
+                    CustomerMenu.getInstance().createCustomerMenu();
                     createWelcomeMenu();
                     break;
                 case 2:

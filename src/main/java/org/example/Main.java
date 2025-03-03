@@ -24,7 +24,7 @@ public class Main {
     public static void main(String[] args) {
         Address address = new Address("Home","Road","Town","County","Country","Postcode");
         WelcomeMenu welcomeMenu = WelcomeMenu.getInstance();
-        welcomeMenu.setCurrentCustomer(new Customer("C1","Ben Portsmouth", "b@p.com", address));
+        //welcomeMenu.setCurrentCustomer(new Customer("C1","Ben Portsmouth", "b@p.com", address));
         welcomeMenu.createWelcomeMenu();
 
 //        GarmentOptionMenu menu = new GarmentOptionMenu();

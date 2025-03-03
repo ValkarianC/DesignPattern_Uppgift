@@ -5,9 +5,11 @@ import org.example.Model.Customer;
 
 import java.util.Scanner;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 public class CustomerMenu {
     private static CustomerMenu instance;
+    private Customer currentCustomer;
 
     private CustomerMenu(){
     }
@@ -20,80 +22,98 @@ public class CustomerMenu {
     }
 
 
-    public void createCustomerMenu(Customer customer){
+    public void createCustomerMenu(){
         System.out.println(MenuUI.LINEBREAK.ELEMENT);
-        if (customer == null){
+        if (currentCustomer == null){
             System.out.println("        Create Customer profile\n");
         } else {
             System.out.println("        Edit Customer profile\n");
         }
 
-        System.out.println("ID : " + (customer==null ? "" : customer.getId()));
-        if (customer == null || customer.getName() == null){
+        System.out.println("ID : " + (currentCustomer==null ? "" : currentCustomer.getId()));
+        if (currentCustomer == null || currentCustomer.getName() == null){
             System.out.println("1: Enter Name");
         } else {
-            System.out.println("1: Name: "+ customer.getName());
+            System.out.println("1: Name: "+ currentCustomer.getName());
         }
-        if (customer == null || customer.getAddress() == null){
+        if (currentCustomer == null || currentCustomer.getAddress() == null){
             System.out.println("2: Enter Address");
         } else {
-            System.out.println("2: Address: " + customer.getAddress().getFullAddress());
+            System.out.println("2: Address: " + currentCustomer.getAddress().getFullAddress());
         }
-        System.out.println("\n3: Exit to main menu");
+        if (currentCustomer == null || currentCustomer.getEmail() == null){
+            System.out.println("3: Enter email");
+        } else {
+            System.out.println("3: Email: " + currentCustomer.getEmail());
+        }
+        System.out.println("\n4: Exit to main menu");
         System.out.println(MenuUI.LINEBREAK.ELEMENT);
         System.out.println("Enter option:");
-        processCustomerMenuChoice(customer);
+        processCustomerMenuChoice();
     }
 
-    public void processCustomerMenuChoice(Customer customer){
+    public void processCustomerMenuChoice(){
         Scanner scanner = new Scanner(System.in);
         try {
             int choice = Integer.parseInt(scanner.next());
             switch (choice){
                 case 1:
-                    customerNameEntry(customer);
+                    customerNameEntry();
                     break;
                 case 2:
-                    customerAddressEntry(customer);
+                    customerAddressEntry();
                     break;
                 case 3:
-                    WelcomeMenu.getInstance().setCurrentCustomer(customer);
-                    //WelcomeMenu.getInstance().createWelcomeMenu();
+                    customerEmailEntry();
+                case 4:
+                    if (currentCustomer == null || currentCustomer.getName() == null || currentCustomer.getEmail() == null || currentCustomer.getAddress() == null){
+                        System.out.println("Please ensure you have entered your name, address, and email");
+                        createCustomerMenu();
+                    } else {
+                        WelcomeMenu.getInstance().setCurrentCustomer(currentCustomer);
+                    }
                     break;
                 default:
-                    System.out.println("Invalid Choice");
-                    createCustomerMenu(customer);
-                    break;
+                    throw new Exception();
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             System.out.println("Invalid Choice");
-            createCustomerMenu(customer);
+            createCustomerMenu();
         }
     }
 
-    public void customerNameEntry(Customer customer){
-        Scanner scanner = new Scanner(System.in);
+    public void customerNameEntry(){
         String name = "";
-        System.out.println(MenuUI.LINEBREAK.ELEMENT);
-        System.out.println("Enter First Name(s):");
-        name += scanner.next();
-        System.out.println("Enter Last Name(s):");
-        name += " " + scanner.next();
-        if (customer == null){
-            customer = new Customer();
-            assignID(customer);
+        name += processNameInput("First") + " " + processNameInput("Last");
+        if (currentCustomer == null){
+            currentCustomer = new Customer();
+            assignID();
         }
-        customer.setName(name);
-        createCustomerMenu(customer);
+        currentCustomer.setName(name);
+        createCustomerMenu();
     }
 
-    public void customerAddressEntry(Customer customer){
+    public String processNameInput(String nameType){
         Scanner scanner = new Scanner(System.in);
+        System.out.println(MenuUI.LINEBREAK.ELEMENT);
+        System.out.println("Enter "+ nameType + " Name(s):" );
+        String input;
+        input = scanner.nextLine();
+        if (input.isBlank()){
+            System.out.println("Please enter your " + nameType + "Name(s):");
+            input = processNameInput(nameType);
+        } else {
+            return input;
+        }
+        return input;
+    }
+
+    public void customerAddressEntry(){
         Address address;
-        if (customer == null || customer.getAddress()==null){
+        if (currentCustomer == null || currentCustomer.getAddress()==null){
             address = new Address();
         } else {
-            address = customer.getAddress();
+            address = currentCustomer.getAddress();
         }
         System.out.println(MenuUI.LINEBREAK.ELEMENT);
         address.setAddressLine1(processAddressInput(false, "First Line of Address"));
@@ -104,19 +124,19 @@ public class CustomerMenu {
         address.setCountry(processAddressInput(false, "Country"));
         address.setPostcode(processAddressInput(false, "Postcode"));
 
-        if (customer == null){
-            customer = new Customer();
-            assignID(customer);
+        if (currentCustomer == null){
+            currentCustomer = new Customer();
+            assignID();
         }
-        customer.setAddress(address);
+        currentCustomer.setAddress(address);
 
-        createCustomerMenu(customer);
+        createCustomerMenu();
     }
 
     public String processAddressInput(boolean optional, String line){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter "+ line+":");
-        String input = "";
+        String input;
         input = scanner.nextLine();
 
         if (!optional && input.isBlank()){
@@ -128,9 +148,42 @@ public class CustomerMenu {
         return input;
     }
 
-    public void assignID(Customer customer){
+    public void customerEmailEntry(){
+        System.out.println(MenuUI.LINEBREAK.ELEMENT);
+        System.out.println("Enter email: ");
+
+        currentCustomer.setEmail(processEmailInput());
+        createCustomerMenu();
+    }
+
+    public String processEmailInput(){
+        String emailRegex = "^(.+)@(\\S+)$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Scanner scanner = new Scanner(System.in);
+
+        String input;
+        input = scanner.nextLine();
+
+        if (input.isBlank() || !pattern.matcher(input).matches()){
+            System.out.println("Please enter a valid email.");
+            input = processEmailInput();
+        } else {
+            return input;
+        }
+        return input;
+    }
+
+    public void assignID(){
         UUID uuid = UUID.randomUUID();
-        customer.setId("C" + uuid.hashCode());
+        currentCustomer.setId("C" + uuid.hashCode());
         System.out.println("ID assigned to customer");
+    }
+
+    public Customer getCurrentCustomer() {
+        return currentCustomer;
+    }
+
+    public void setCurrentCustomer(Customer currentCustomer) {
+        this.currentCustomer = currentCustomer;
     }
 }
