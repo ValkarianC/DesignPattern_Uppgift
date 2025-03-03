@@ -50,4 +50,8 @@ public abstract class Garment extends BusinessObject {
     public void setColour(GarmentColour colour) {
         this.colour = colour;
     }
+    public String orderPrintout(){
+        return "Name: " + this.getName() + ", ID: "+ this.getId() +
+                "\nPrice: " +  this.price;
+    }
 }

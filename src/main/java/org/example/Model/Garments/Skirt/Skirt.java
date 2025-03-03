@@ -48,4 +48,10 @@ public class Skirt extends Garment {
                 ", pattern=" + pattern +
                 '}';
     }
+    @Override
+    public String orderPrintout(){
+        return "Name: " + this.getName() + ", ID: "+ this.getId() +
+                "\nWaistline: " + this.waistline + ", Pattern: " + this.pattern +
+                "\nPrice: " +  this.getPrice() + "\n";
+    }
 }

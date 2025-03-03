@@ -58,7 +58,8 @@ public class CustomerMenu {
                     break;
                 case 3:
                     WelcomeMenu.getInstance().setCurrentCustomer(customer);
-                    WelcomeMenu.getInstance().createWelcomeMenu();
+                    //WelcomeMenu.getInstance().createWelcomeMenu();
+                    break;
                 default:
                     System.out.println("Invalid Choice");
                     createCustomerMenu(customer);

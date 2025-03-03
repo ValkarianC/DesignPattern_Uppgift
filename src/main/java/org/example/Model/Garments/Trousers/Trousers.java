@@ -48,4 +48,11 @@ public class Trousers extends Garment {
                 ", length=" + length +
                 '}';
     }
+
+    @Override
+    public String orderPrintout(){
+        return "Name: " + this.getName() + ", ID: "+ this.getId() +
+                "\nFit: " + this.fit + ", Length: " + this.length +
+                "\nPrice: " +  this.getPrice() + "\n";
+    }
 }

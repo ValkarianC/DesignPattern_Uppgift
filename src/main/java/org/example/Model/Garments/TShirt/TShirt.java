@@ -48,4 +48,10 @@ public class TShirt extends Garment {
                 ", neck=" + neck +
                 '}';
     }
+    @Override
+    public String orderPrintout(){
+        return "Name: " + this.getName() + ", ID: "+ this.getId() +
+                "\nSleeves: " + this.sleeves + ", Neckline: " + this.neck +
+                "\nPrice: " +  this.getPrice() + "\n";
+    }
 }
