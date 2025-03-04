@@ -18,8 +18,8 @@ public class OrderWaistlineCommand implements OrderCommand {
     public void createMenu() {
         System.out.println(MenuUI.LINEBREAK.ELEMENT);
         System.out.println("        Choose waistline\n");
-        System.out.println("1: Polo");
-        System.out.println("2: Turtleneck");
+        System.out.println("1: High Waist");
+        System.out.println("2: Low Rise");
         parseUserInput();
     }
 

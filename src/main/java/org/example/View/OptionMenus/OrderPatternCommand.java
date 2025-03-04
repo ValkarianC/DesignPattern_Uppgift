@@ -18,8 +18,8 @@ public class OrderPatternCommand implements OrderCommand {
     public void createMenu() {
         System.out.println(MenuUI.LINEBREAK.ELEMENT);
         System.out.println("        Choose pattern\n");
-        System.out.println("1: Straight");
-        System.out.println("2: Flared");
+        System.out.println("1: Pleated");
+        System.out.println("2: Pencil");
         parseUserInput();
     }
 

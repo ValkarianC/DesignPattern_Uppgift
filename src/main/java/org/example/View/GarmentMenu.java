@@ -1,13 +1,11 @@
 package org.example.View;
 
 import org.example.Controller.*;
+import org.example.Controller.Commands.OrderDetailsPipeline;
 import org.example.Model.Customer;
-import org.example.Model.Garments.Garment;
-import org.example.Model.Garments.GarmentSize;
 import org.example.Model.Order;
 
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class GarmentMenu {
@@ -83,13 +81,16 @@ public class GarmentMenu {
             int choice = Integer.parseInt(scanner.next());
             switch (choice){
                 case 1:
-                    OrderService.getInstance().orderTrousers(this.currentCustomer);
+                    OrderService.getInstance().createTrousersOrder();
+                    createGarmentMenu(OrderService.getInstance().getOrder());
                     break;
                 case 2:
-                    OrderService.getInstance().orderTShirt(this.currentCustomer);
+                    OrderService.getInstance().createTShirtOrder();
+                    createGarmentMenu(OrderService.getInstance().getOrder());
                     break;
                 case 3:
-                    OrderService.getInstance().orderSkirt(this.currentCustomer);
+                    OrderService.getInstance().createSkirtOrder();
+                    createGarmentMenu(OrderService.getInstance().getOrder());
                     break;
                 default:
                     System.out.println("Invalid Choice");
@@ -106,30 +107,72 @@ public class GarmentMenu {
         System.out.println(MenuUI.LINEBREAK.ELEMENT);
         System.out.println("        Review Order\n");
 
-        if (order.getGarments().isEmpty()){
+        OrderDetailsPipeline pipeline = new OrderDetailsPipeline();
+
+        if (OrderService.getInstance().getTotalOrder().isEmpty()){
             System.out.println("Basket Empty");
+            System.out.println("\n1: Return to Order Menu");
+
+            try {
+                int choice = Integer.parseInt(new Scanner(System.in).next());
+                if (choice == 1) {
+                    createGarmentMenu(order);
+                } else {
+                    throw new Exception();
+                }
+            } catch (Exception e){
+                System.out.println("Invalid Entry");
+                createReviewMenu(order);
+            }
+
         } else {
             double total = 0;
-            for (Garment garment : order.getGarments()){
-                System.out.println(garment.orderPrintout());
-                total += (garment.getPrice());
+
+            for (int i = 0; i < OrderService.getInstance().getTotalOrder().size(); i++) {
+                HashMap orderItem = OrderService.getInstance().getTotalOrder().get(i);
+                System.out.println("Order Item: "+ (i+1));
+                switch (String.valueOf(orderItem.get("Garment"))){
+                    case "Trousers":
+                        System.out.println(pipeline.execute(0,orderItem));
+                        break;
+                    case "T-Shirt":
+                        System.out.println(pipeline.execute(1,orderItem));
+                        break;
+                    case "Skirt":
+                        System.out.println(pipeline.execute(2,orderItem));
+                        break;
+                    default:
+                        break;
+                }
+                total += Double.parseDouble(String.valueOf(orderItem.get("Price")));
+                System.out.println();
             }
+//            for (Garment garment : order.getGarments()){
+//                System.out.println(garment.orderPrintout());
+//                total += (garment.getPrice());
+//            }
             System.out.println("Total Price: " + (String.format("%.2f", total)));
-        }
-        System.out.println("\n1: Return to Order Menu");
-        try {
-            int choice = Integer.parseInt(new Scanner(System.in).next());
-            switch (choice){
-                case 1:
-                    createGarmentMenu(order);
-                    break;
-                default:
-                    throw new Exception();
+            System.out.println("\n1: Place Order");
+            System.out.println("\n2: Return to Order Menu");
+            try {
+                int choice = Integer.parseInt(new Scanner(System.in).next());
+                switch (choice){
+                    case 1:
+                        OrderService.getInstance().placeOrder();
+                        createGarmentMenu(order);
+                        break;
+                    case 2:
+                        createGarmentMenu(order);
+                        break;
+                    default:
+                        throw new Exception();
+                }
+            } catch (Exception e){
+                System.out.println("Invalid Entry");
+                createReviewMenu(order);
             }
-        } catch (Exception e){
-            System.out.println("Invalid Entry");
-            createReviewMenu(order);
         }
+
     }
 
     public Customer getCurrentCustomer() {

@@ -40,12 +40,9 @@ public class OrderSizeCommand implements OrderCommand {
                     output = String.valueOf(GarmentSize.Large);
                     break;
                 default:
-                    System.out.println("Invalid Entry");
-                    createMenu();
-                    break;
-
+                    throw new Exception();
             }
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             System.out.println("Invalid Entry");
             createMenu();
         }

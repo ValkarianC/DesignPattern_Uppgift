@@ -54,7 +54,8 @@ public class WelcomeMenu {
                         createWelcomeMenu();
                     } else {
                         GarmentMenu.getInstance().setCurrentCustomer(currentCustomer);
-                        GarmentMenu.getInstance().createGarmentMenu(OrderService.getInstance().createNewOrder(currentCustomer));
+                        OrderService.getInstance().createNewOrder(currentCustomer);
+                        GarmentMenu.getInstance().createGarmentMenu(OrderService.getInstance().getOrder());
                         createWelcomeMenu();
                     }
                     break;

@@ -1,33 +1,26 @@
 package org.example;
 
-import org.example.Controller.SkirtBuilder;
-import org.example.Controller.TShirtBuilder;
-import org.example.Controller.TrouserBuilder;
+import org.example.Controller.OrderService;
 import org.example.Model.Address;
+import org.example.Model.CEO;
 import org.example.Model.Customer;
-import org.example.Model.Garments.GarmentColour;
-import org.example.Model.Garments.GarmentMaterial;
-import org.example.Model.Garments.GarmentSize;
-import org.example.Model.Garments.Skirt.Skirt;
-import org.example.Model.Garments.Skirt.SkirtPattern;
-import org.example.Model.Garments.Skirt.SkirtWaistline;
-import org.example.Model.Garments.TShirt.TShirt;
-import org.example.Model.Garments.TShirt.TShirtNeck;
-import org.example.Model.Garments.TShirt.TShirtSleeves;
-import org.example.Model.Garments.Trousers.TrouserFit;
-import org.example.Model.Garments.Trousers.TrouserLength;
 import org.example.Model.Garments.Trousers.Trousers;
-import org.example.View.OptionMenus.GarmentOptionMenu;
+import org.example.Model.Order;
 import org.example.View.WelcomeMenu;
 
 public class Main {
     public static void main(String[] args) {
+
         Address address = new Address("Home","Road","Town","County","Country","Postcode");
         WelcomeMenu welcomeMenu = WelcomeMenu.getInstance();
-        //welcomeMenu.setCurrentCustomer(new Customer("C1","Ben Portsmouth", "b@p.com", address));
+        welcomeMenu.setCurrentCustomer(new Customer("C1","Ben Portsmouth", "b@p.com", address));
         welcomeMenu.createWelcomeMenu();
 
-//        GarmentOptionMenu menu = new GarmentOptionMenu();
+//        OrderService.getInstance().createNewOrder(welcomeMenu.getCurrentCustomer());
+//        OrderService.getInstance().createTrousersOrder();
+//        System.out.println(OrderService.getInstance().getTotalOrder().get(1).get("Price"));
+
+//        GarmentOptionMenus menu = new GarmentOptionMenus();
 //
 //        Trousers trousers;
 //        TrouserBuilder builder = new TrouserBuilder();
