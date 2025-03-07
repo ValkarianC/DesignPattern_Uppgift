@@ -1,7 +1,5 @@
 package org.example.Model;
 
-import java.util.ArrayList;
-
 public class Customer extends BusinessObject{
     private String email;
     private Address address;

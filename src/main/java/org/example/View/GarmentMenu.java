@@ -49,7 +49,6 @@ public class GarmentMenu {
                     System.out.println("Returning to welcome screen will cancel any current order.\nProceed? Y/N");
                     if (scanner.next().equalsIgnoreCase("y")){
                         WelcomeMenu.getInstance().setCurrentCustomer(this.currentCustomer);
-                        //WelcomeMenu.getInstance().createWelcomeMenu();
                     } else {
                         createGarmentMenu(order);
                     }
@@ -147,10 +146,6 @@ public class GarmentMenu {
                 total += Double.parseDouble(String.valueOf(orderItem.get("Price")));
                 System.out.println();
             }
-//            for (Garment garment : order.getGarments()){
-//                System.out.println(garment.orderPrintout());
-//                total += (garment.getPrice());
-//            }
             System.out.println("Total Price: " + (String.format("%.2f", total)));
             System.out.println("\n1: Place Order");
             System.out.println("\n2: Return to Order Menu");
